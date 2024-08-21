@@ -90,6 +90,9 @@ enum class ContentType: int {
 typedef void (*EventHandlerWithContentType)(const char* name, const char* data, size_t size, ContentType type);
 typedef std::function<void(const char* name, const char* data, size_t size, ContentType type)> EventHandlerWithContentTypeFn;
 
+typedef void (*EventHandlerWithVariant)(const char* name, Variant data);
+typedef std::function<void(const char* name, Variant data)> EventHandlerWithVariantFn;
+
 } // namespace particle
 
 class CloudDisconnectOptions {
@@ -376,6 +379,9 @@ public:
 
     bool subscribe(const char* name, particle::EventHandlerWithContentType handler);
     bool subscribe(const char* name, particle::EventHandlerWithContentTypeFn handler);
+
+    bool subscribe(const char* name, particle::EventHandlerWithVariant handler);
+    bool subscribe(const char* name, particle::EventHandlerWithVariantFn handler);
 
     void unsubscribe()
     {
